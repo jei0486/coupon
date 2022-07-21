@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.9'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'application'
+}
+
+group = 'com.shoppingmall'
+sourceCompatibility = '11'
+
+
+bootJar {enabled = false}
+jar { enabled = true}
+
+repositories {
+	mavenCentral()
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	group = 'com.shoppingmall'
+	sourceCompatibility = '11'
+
+	repositories {
+		mavenCentral()
+	}
+
+
+
+	dependencies {
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+
+	}
+}
+
+dependencies {
+}

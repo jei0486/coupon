@@ -1,0 +1,40 @@
+spring:
+  ################## Kafka ##################
+  kafka:
+    defaultBootstrapServers: 172.30.10.31:9092
+    consumer:
+      commonConfig:
+        bootstrapServers: ${spring.kafka.defaultBootstrapServers}
+        groupId: Coupon
+        clientId: Coupon
+        timeoutMs: 15000
+        fetchMinBytes: 1
+        fetchMaxWaitMs: 500
+      ############## 쿠폰 Consumer 설정
+      timeAttackCouponConsumerConfig:
+        topic: TimeAttackCouponIssue
+
+  ################## Redis ##################
+  redis:
+    host: localhost
+    port: 6379
+  ################## Datasource ##################
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: system
+    password: 1234
+    driverClassName: oracle.jdbc.driver.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: none
+################## actuator management ##################
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+        # include: "metrics, prometheus"
+        # include : "*" 으로 설정하게되면 모든 설정을 모니터링 할수 있게된다.
+
+server:
+  port: 8082
