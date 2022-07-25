@@ -15,5 +15,8 @@ public class UserCouponResponseDto {
     private String start_dt;
     private String end_dt;
     private char rate_yn;
+    private String issued_at;
+    private String used_at;
+    private String use_yn;
 
 }

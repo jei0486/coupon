@@ -12,5 +12,5 @@ public interface UserCouponRepository extends JpaRepository<UserCouponEntity,Str
 
     Optional<UserCouponEntity> findById(String id);
 
-    List<UserCouponEntity> findByUserId(String user_id);
+    List<UserCouponEntity> findByUser_id(String user_id);
 }

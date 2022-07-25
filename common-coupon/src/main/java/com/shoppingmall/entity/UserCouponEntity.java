@@ -1,11 +1,11 @@
 package com.shoppingmall.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shoppingmall.dto.CouponResponseDto;
+import com.shoppingmall.dto.UserCouponResponseDto;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,10 +26,20 @@ public class UserCouponEntity {
     private LocalDateTime used_at;
     private String use_yn;
 
-    public CouponResponseDto toResponseDto() {
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coupon_id", referencedColumnName = "id")
+    private CouponEntity coupon;
 
-        return CouponResponseDto.builder()
+    public UserCouponResponseDto toResponseDto() {
 
+        return UserCouponResponseDto.builder()
+                .user_id(user_id)
+                .discount(coupon.getDiscount())
+                .c_name(coupon.getC_name())
+                .rate_yn(coupon.getRate_yn())
+                .start_dt(coupon.getStart_dt())
+                .end_dt(coupon.getEnd_dt())
                 .build();
     }
 }
