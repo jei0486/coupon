@@ -1,3 +1,4 @@
+
 package com.shoppingmall.config;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,13 @@ public class KafkaConsumerConfig {
         return setConsumerFactory(kafkaProperties.getConsumer().getCommonConfig());
     }
 
+    // 쿠폰 만료 알림
+    @Bean
+    public ConsumerFactory<String, String> notificationExpireCouponConsumerFactory() {
+        // notificationExpireCouponConsumerConfig
+        return setConsumerFactory(kafkaProperties.getConsumer().getCommonConfig());
+    }
+
     // 추가 가능 ....
 
     private ConsumerFactory<String, String> setConsumerFactory(final KafkaProperties.ConsumerCommonConfig consumerCommonConfig) {
@@ -50,6 +58,14 @@ public class KafkaConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 
         factory.setConsumerFactory(timeAttackCouponConsumerFactory());
+        factory.setErrorHandler(new LoggingErrorHandler());
+        return factory;
+    }
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String,String> notificationExpireCouponKafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+
+        factory.setConsumerFactory(notificationExpireCouponConsumerFactory());
         factory.setErrorHandler(new LoggingErrorHandler());
         return factory;
     }

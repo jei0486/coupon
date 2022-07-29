@@ -1,8 +1,8 @@
 package com.shoppingmall.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.shoppingmall.dto.CouponResponseDto;
 import com.shoppingmall.dto.UserCouponResponseDto;
+import com.shoppingmall.enums.CouponStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,26 +20,28 @@ public class UserCouponEntity {
 
     @Id
     private String id;
-    private String policy_id;
     private String user_id;
     private LocalDateTime issued_at;
     private LocalDateTime used_at;
-    private String use_yn;
+
+    @Enumerated(value = EnumType.STRING)
+    private CouponStatus status;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coupon_id", referencedColumnName = "id")
+    @ManyToOne(targetEntity = CouponEntity.class , fetch = FetchType.LAZY)
+    @JoinColumn(name = "POLICY_ID")
     private CouponEntity coupon;
 
-    public UserCouponResponseDto toResponseDto() {
-
+    public UserCouponResponseDto toResponseDto(){
         return UserCouponResponseDto.builder()
                 .user_id(user_id)
-                .discount(coupon.getDiscount())
+                .issued_at(issued_at)
                 .c_name(coupon.getC_name())
-                .rate_yn(coupon.getRate_yn())
-                .start_dt(coupon.getStart_dt())
-                .end_dt(coupon.getEnd_dt())
+                .discount(coupon.getDiscount())
+                .start_dt(coupon.getStartDt())
+                .end_dt(coupon.getEndDt())
                 .build();
     }
+
+
 }
