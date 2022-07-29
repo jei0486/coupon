@@ -23,10 +23,6 @@
   - 성능개선을 위한 설정 변경 (압축, batch,size)
 
 
-(spring boot 로 알림을 구현할때 고려해야할것)
-
-https://blog.dramancompany.com/2022/01/java-%EA%B8%B0%EB%B0%98%EC%9D%98-%EC%95%8C%EB%A6%BC-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A1%9C-msa-%EC%A0%84%ED%99%98%EA%B8%B0/
-
 ## 웹 어플리케이션 개발시 고려되는 방법
 # polling (client pull)
   - 클라이언트가 일정한 주기로 서버에 업데이트 요청을 보내는 방법.
@@ -46,28 +42,3 @@ https://blog.dramancompany.com/2022/01/java-%EA%B8%B0%EB%B0%98%EC%9D%98-%EC%95%8
 - 넷플릭스에서 개발한, RestTemplate 를 대체할수 있는 라이브러리 
 - MSA환경에서는 각 서비스 간의 호출이 기존의 단일 시스템일 때보다 증가하게 됩니다. 이러한 상황에서 Feign은 API 간의 호출을 편하게 해 주기 위해서 만들어졌습니다.
 - https://techblog.woowahan.com/2630/
-
-
-# implementation("com.querydsl:querydsl-jpa") , implementation("com.querydsl:querydsl-apt")
-# gradle : implementaion 과 compile 의 차이점
-
-# jpa : querydsl , jpql , 
-# jpa : n + 1 의 문제점   : join 의 여러가지 방법
-    - fetch join
-    - entity graph
-    
-
-
-### jpa
-
-연관관계 매핑시 고려사항
-- 다중성
-- 단방향 , 양방향
-
-# 다대일 [N:1] @ManyToOne
-
-# 일대다 [N:1] @OneToMany
-
-# 일대일 [1:1] @OneToOne
-
-# 다대다 [N:M] @ManyToMany
